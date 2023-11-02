@@ -3,7 +3,9 @@ const control = require("../controllers/controller")
 const middle = require("../controllers/middleware")
 
 
-
+router.get("/", (req, res) => {
+	res.redirect("/html/index.html")
+})
 
 
 // Post

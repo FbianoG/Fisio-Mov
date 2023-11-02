@@ -10,9 +10,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static("./src/public"))
 app.use(router)
 
-app.get("/", (req, res) => {
-	res.redirect("/html/index.html")
-})
+
 
 DataBase.connectDataBase()
 
