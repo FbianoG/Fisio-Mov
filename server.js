@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static('./src/public'))
 app.use(router)
 
-DataBase.connectDataBase()
+DataBase.connectDataBase()s
 
 app.listen(port, () => {
 console.log(`Servidor funcionando na porta:`, port)
