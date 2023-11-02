@@ -114,7 +114,13 @@ nav .active {
     transition: 500ms;
 }
 
-.fa-solid {}
+.containerActivity h3 {
+    color: #2cb5a0;
+}
+
+.extendListBtn {
+    color: #666;
+}
 
 .fa-chevron-down {
 display: flex;
@@ -147,7 +153,7 @@ cursor: pointer;
 }
 
 .cardData h4 {
-    color: #333;
+    color: #555;
     font-weight: 500;
 }
 
@@ -162,6 +168,7 @@ cursor: pointer;
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     column-gap: 30px;
     padding: 0px 30px;
 }
