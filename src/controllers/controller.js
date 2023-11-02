@@ -43,7 +43,7 @@ async function user(req, res) {
 async function getPacients(req, res) {
 
 	try {
-		allPacients = await PacientModel.find({ isPacient: true }, "-password")
+		let allPacients = await PacientModel.find({ isPacient: true }, "-password")
 		if (allPacients.length > 0) {
 			return res.status(200).json({ auth: true, allPacients })
 		}

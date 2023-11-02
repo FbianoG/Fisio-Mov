@@ -1,13 +1,14 @@
+/* eslint-disable no-undef */
 let userData
 
-let activityList = document.querySelectorAll('.listActivity')
+let activityList = document.querySelectorAll(".listActivity")
 
-let extendBtn = document.querySelectorAll('.extendListBtn')
+let extendBtn = document.querySelectorAll(".extendListBtn")
 
 
 extendBtn.forEach(element => {
-    element.addEventListener('click', extendList)
-});
+	element.addEventListener("click", extendList)
+})
 
 
 
@@ -15,59 +16,61 @@ extendBtn.forEach(element => {
 
 
 function extendList() {
-    let target = this.parentElement
-    if (target.style.maxHeight == '500px') {
-        target.style.maxHeight = '45px'
-        this.style.transform = "rotate(0)"
-    } else {
-        target.style.maxHeight = '500px';
-        this.style.transform = "rotate(180deg)";
-    }
+	let target = this.parentElement
+	if (target.style.maxHeight == "500px") {
+		target.style.maxHeight = "45px"
+		this.style.transform = "rotate(0)"
+	} else {
+		target.style.maxHeight = "500px"
+		this.style.transform = "rotate(180deg)"
+	}
 }
 
 
 
 
 async function getUser() {
-    const urlParams = new URLSearchParams(window.location.search);
-    let token = urlParams.get('id');
-    localStorage.setItem('token', token)
-    const user = await fetch(`/usuario?id=${token}`)
-    const data = await user.json()
-    loadingData(data.user);
+	const urlParams = new URLSearchParams(window.location.search)
+	let token = urlParams.get("id")
+	localStorage.setItem("token", token)
+	const user = await fetch(`/usuario?id=${token}`)
+	const data = await user.json()
+	loadingData(data.user)
 }
 
 async function loadingData(e) {
 
-    let getAct = await fetch('/buscarAct')
-    let data = await getAct.json()
-    let allActivity = data.allAct
+	let getAct = await fetch("/buscarAct")
+	let data = await getAct.json()
+	let allActivity = data.allAct
 
-    createActivity(allActivity, e)
-
+	createActivity(allActivity, e)
 }
 
 function createActivity(atividadeApi, userData) {
-    activityList[0].innerHTML = ''
-    console.log(userData.activity);
-    let listHg = document.querySelectorAll('.higher')[0]
-    let listLw = document.querySelectorAll('.lower')[0]
+	activityList[0].innerHTML = ""
+	let listHg = document.querySelectorAll(".higher")[0]
+	let listLw = document.querySelectorAll(".lower")[0]
 
-    atividadeApi.forEach(element => {
-        let newActivity = document.createElement('li')
-        newActivity.classList = "cardActivity"
-        newActivity.innerHTML = createActivityHtml(element)
-        if (element.category == 'hg' && element._id.includes(userData.activity.hg)) {
-            listHg.appendChild(newActivity)
-        } else if (element.category == 'lw' && element._id.includes(userData.activity.lw)) {
-            listLw.appendChild(newActivity)
-        }
-    });
+	atividadeApi.forEach(element => {
+		
+		let newActivity = document.createElement("li")
+		newActivity.classList = "cardActivity"
+		newActivity.innerHTML = createActivityHtml(element)
+		if (element.category == "hg" && userData.activity.hg.includes(element._id)) {
+			listHg.appendChild(newActivity)
+		} else if (element.category == "lw" && userData.activity.lw.includes(element._id)) {
+			listLw.appendChild(newActivity)
+            
+		}
+
+	})
+
 }
 
 
 function createActivityHtml(e) {
-    const html = `
+	const html = `
         <div class="cardData">
             <span style="display:none;">${e._id}</span>
             <h4>${e.name}</h4>
@@ -79,7 +82,7 @@ function createActivityHtml(e) {
             <a href="${e.web}" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square" id="acessActivityBtn"></i></a>
         </div>
     `
-    return html
+	return html
 }
 
 
