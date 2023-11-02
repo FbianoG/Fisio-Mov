@@ -10,6 +10,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static("./src/public"))
 app.use(router)
 
+
+
 DataBase.connectDataBase()
 
 app.listen(port, () => {

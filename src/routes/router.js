@@ -8,7 +8,9 @@ const middle = require("../controllers/middleware")
 
 // Post
 
-router.get("/", (req, res) => res.sendFile("/src/public/html/index.html"))
+router.get("/", (req, res) => {
+	res.redirect("/html/index.html")
+})
 
 router.post("/registrar", control.createUser)
 
