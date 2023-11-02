@@ -5,8 +5,13 @@
     font-family: 'Open Sans', sans-serif;
 }
 
+html {
+    width: 100vw;
+    overflow-x: hidden;
+}
+
 body {
-    background: #fdfdfd;
+    overflow-x: hidden;
 }
 
 header {
@@ -86,7 +91,7 @@ nav .active {
     height: 320px;
     position: fixed;
     right: 10px;
-    top: 70px;
+    top: -290px;
     padding: 20px;
     border-radius: 0 0 10px 10px;
     z-index: 9;
@@ -217,8 +222,8 @@ nav .active {
     position: absolute;
     left: 0;
     height: 100%;
+    width: 100%;
     object-fit: cover;
-    transform: rotate(180deg);
 }
 
 
@@ -356,12 +361,12 @@ nav .active {
 
 .numberContent h1 {
     font-size: 40px;
-    color: #619b7f;
+    color: #555;
 }
 
 .numberContent h2 {
     font-size: 30px;
-    color: #5a655d;
+    color: #2cb5a0;
     margin-bottom: 50px;
 }
 
@@ -378,7 +383,7 @@ nav .active {
 }
 
 .formEmail p {
-    color: #c82c3f;
+    color: #444;
     font-size: 22px;
     font-weight: 500;
 }
@@ -409,7 +414,7 @@ nav .active {
     line-height: 35px;
     border: none;
     border-radius: 5px;
-    background: #557957;
+    background: #2cb5a0;
     color: #fdfdfd;
     font-size: 15px;
     font-weight: 500;
@@ -419,7 +424,7 @@ nav .active {
 .formEmail button:hover {
     transition: 250ms;
     background: #fdfdfd;
-    color: #c82c3f;
+    color: #2cb5a0;
     box-shadow: 3px 3px 5px #0003;
 }
 
@@ -452,12 +457,6 @@ nav .active {
     left: 330px;
     z-index: 1;
 }
-
-
-
-
-
-
 
 
 
@@ -613,4 +612,137 @@ nav .active {
 .footerData {
     background: #5a655d;
     height: 200px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* mb < 480 - TB < 1024 - */
+@media screen and (max-width: 480px) {
+    header {
+        display: flex;
+        padding: 0;
+        justify-content: space-around;
+        gap: 20px;
+    }
+
+    header nav {
+        display: none;
+    }
+
+
+
+    .acessBar :nth-child(1) {
+        background: #fdfdfd;
+        color: #2cb5a0;
+        box-shadow: 3px 3px 5px #0003;
+    }
+    .acessBar :nth-child(1):hover {
+        background: #2cb5a0;
+        color: #fdfdfd;
+        box-shadow: none;
+    }
+
+    .acessBar :nth-child(2) {
+        display: none;
+    }
+
+    .accessForm {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .banner {
+
+        height: 300px;
+    }
+
+    .mainImage img {
+        opacity: 0.5;
+        filter: brightness(0.5);
+    }
+
+    .apresentation h1 {
+        width: 100%;
+        margin: 0;
+    }
+
+    .numbersList {
+        width: 65%;
+        /* border: 1px solid red; */
+        margin: 0 auto;
+        justify-content: flex-start;
+        left: 0;
+    }
+
+    .cardNumber {
+        padding: 25px 10px;
+        min-width: 100%;
+        position: relative;
+        animation: caroussel 15s infinite ;
+        right: calc(0% - 0px)
+    }
+
+    @keyframes caroussel {
+        0%{    right: calc(0% - 0px);}
+        20%{    right: calc(0% - 0px);}
+        33%{    right: calc(100% + 60px);}
+        53%{    right: calc(100% + 60px);}
+        66%{    right: calc(200% + 120px);}
+        86%{    right: calc(200% + 120px);}
+        100%{    right: ;}
+    }
+
+    .numberData {
+        margin: 0px auto;
+        width: 100%;
+        height: auto;
+    }
+
+    .numberImages {
+        display: none;
+    }
+
+    .numberContent {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .numberContent h1,
+    .numberContent h2 {
+        text-align: center;
+    }
+
+    .formEmail p {
+        text-align: center;
+    }
+
+    .formEmail input {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .formEmail textarea {
+        width: 100%;
+        height: 150px;
+        font-size: 16px;
+    }
+
+    .formEmail button {
+        margin: 20px auto;
+    }
+
 }
