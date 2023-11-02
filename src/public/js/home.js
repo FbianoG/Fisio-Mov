@@ -28,6 +28,7 @@ function showAcessForm() {
 }
 
 function hiddenAcessForm() {
-	accessForm.style.top = "-320px"
 	accessForm.style.transition = "350ms"
+	accessForm.style.top = "-320px"
+
 }

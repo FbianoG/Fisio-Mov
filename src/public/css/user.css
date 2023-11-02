@@ -5,28 +5,34 @@
     font-family: 'Open Sans', sans-serif;
 }
 
+html {
+    width: 100vw;
+    overflow-x: hidden;
+}
+
 body {
     background: #fdfdfd;
 }
 
 header {
     background: #fdfdfd;
+    width: 100%;
     height: 70px;
-    display: grid;
-    grid-template-columns: max-content max-content 1fr;
-    gap: 100px;
+    position: fixed;
+    display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
+
     box-shadow: 0px 3px 5px #0003;
-    position: relative;
     z-index: 10;
     padding: 0 50px;
+    top: 0;
 }
 
 .logo {
     font-size: 22px;
     font-weight: bold;
-    color: #57af5e;
+    color: #333;
     font-family: 'Nunito', sans-serif;
 }
 
@@ -85,12 +91,15 @@ nav .active {
 
 /* CONTENT */
 .content {
+    padding: 70px 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .containerActivity {
+    width: 90%;
+    max-width: 1300px;
     max-height: 45px;
     padding: 0 10px;
     display: grid;
@@ -98,7 +107,6 @@ nav .active {
     grid-template-rows: 45px;
     align-items: center;
     justify-content: center;
-    width: 1000px;
     box-shadow: 3px 3px 10px #0003;
     border-radius: 10px;
     overflow: hidden;
@@ -130,10 +138,12 @@ cursor: pointer;
     /* border: 1px solid blue; */
     margin-bottom: 10px;
     display: flex;
+    justify-content: space-between;
+    text-transform: capitalize;
 }
 
 .cardData {
-    width: 80%;
+    width: 50%;
 }
 
 .cardData h4 {
@@ -147,41 +157,34 @@ cursor: pointer;
 }
 
 .statusActivity {
+
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
-    row-gap: 3px;
-    column-gap: 40px;
+    column-gap: 30px;
+    padding: 0px 30px;
 }
 
-.statusActivity p {
-    font-size: 15px;
-    font-weight: 500;
-    color: #387f3e;
-}
-
-.statusActivity i {
-    color: #387f3e;
-}
-
-#acessActivityBtn {
-    color: #333;
+.statusActivity a {
     font-size: 25px;
-    cursor: pointer;
+    color: #2cb5a0;
 }
 
 
 
 
 
+/* mb <= 767 - TB <= 1023 - */
+@media screen and (max-width: 767px) {
 
-
-
-
-
-
+    .statusActivity p , .statusActivity i {
+        display: none;
+    }
+    .statusActivity a i {
+        display: block;
+    }
+}
 
 
 

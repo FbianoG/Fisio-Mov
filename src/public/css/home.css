@@ -33,7 +33,6 @@ header {
 .logo {
     font-size: 22px;
     font-weight: bold;
-    color: #57af5e;
     font-family: 'Nunito', sans-serif;
     color: #333;
 }
@@ -97,6 +96,7 @@ nav .active {
     z-index: 9;
     overflow: hidden;
     box-shadow: 3px 3px 5px #0003;
+    transition: 350ms;
 }
 
 .accessForm h3 {
@@ -302,7 +302,7 @@ nav .active {
 }
 
 .numbers {
-    margin-bottom: 100px;
+    padding: 0 0 100px;
 }
 
 .numbersList {
@@ -346,17 +346,16 @@ nav .active {
 }
 
 .numberData {
-    margin: 100px auto;
+    margin: 100px auto 0;
     width: 80%;
     display: flex;
-    height: 800px;
+    height: 835px;
 }
 
 .numberContent {
     width: 50%;
-    margin: 30px 0;
 
-    padding-left: 10%;
+
 }
 
 .numberContent h1 {
@@ -399,7 +398,7 @@ nav .active {
 }
 
 .formEmail textarea {
-    height: 35px;
+    height: 120px;
     width: 70%;
     padding: 3px 5px;
     border: 1px solid #ddd;
@@ -430,11 +429,23 @@ nav .active {
 
 
 .numberImages {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.numberImagesContainer {
+    width: 90%;
+    height: 100%;
     position: relative;
 }
 
+
+
 .numberImages img {
-    width: 300px;
+    width: 65%;
+    max-width: 370px;
     height: 300px;
     object-fit: cover;
     position: absolute;
@@ -442,25 +453,33 @@ nav .active {
 }
 
 .img1 {
-    left: 330px;
+    left: 35%;
     z-index: 2;
 }
 
 .img2 {
-    top: 230px;
-    left: 100px;
+    top: 260px;
     z-index: 2;
 }
 
 .img3 {
-    top: 400px;
-    left: 330px;
+    top: 530px;
+    left: 35%;
     z-index: 1;
 }
 
 
 
-
+.legend {
+    margin: 0 auto;
+    width: 50%;
+    max-width: 680px;
+    min-width: 375px;
+    padding: 0 20px;
+    font-size: 14px;
+    color: #999;
+    text-align: center;
+}
 
 
 
@@ -468,15 +487,19 @@ nav .active {
 
 .deck {
     width: 100%;
-    padding: 50px 0px 150px;
+    padding: 70px 0px 150px;
     background: #eee;
 }
 
 .title {
-    color: #619b7f;
+    color: #2cb5a0;
     text-align: center;
-    margin-bottom: 100px;
+    padding: 0 20px;
     font-size: 40px;
+}
+
+#titleRecursos {
+    margin-bottom: 70px;
 }
 
 .containerCard {
@@ -490,18 +513,15 @@ nav .active {
 .card {
     background: #fff;
     width: 300px;
-    /* border: 1px solid red; */
     height: 350px;
-    box-shadow: 5px 5px 10px #0001;
-    border-radius: 10px;
-    overflow: hidden;
     padding: 15px;
+    box-shadow: 5px 5px 10px #0001;
+    overflow: hidden;
 }
 
 .cardImage {
     width: 100%;
     height: 65%;
-    border-radius: 10px;
     overflow: hidden;
 }
 
@@ -513,7 +533,7 @@ nav .active {
 
 .card h3 {
     padding: 5px 0;
-    color: #619b7f;
+    color: #2cb5a0;
 }
 
 .card p {
@@ -522,7 +542,7 @@ nav .active {
 }
 
 .members {
-    padding: 50px 0px 250px;
+    padding: 70px 0px 150px;
 }
 
 .membersList {
@@ -530,13 +550,14 @@ nav .active {
     gap: 40px;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    margin: 70px 0 0;
 }
 
 .memberCard {
-    width: 500px;
+    width: 420px;
     height: 120px;
     background: #fff;
-    box-shadow: 5px 5px 10px #0001;
+    box-shadow: 3px 3px 10px #0003;
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -571,7 +592,7 @@ nav .active {
 }
 
 .memberData h3 {
-    color: #619b7f;
+    color: #666;
 }
 
 .memberData p {
@@ -581,7 +602,7 @@ nav .active {
 
 .memberData label {
     font-size: 13px;
-    color: #c82c3f;
+    color: #bbb;
     cursor: pointer;
     width: fit-content;
 }
@@ -619,25 +640,52 @@ nav .active {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-/* mb < 480 - TB < 1024 - */
-@media screen and (max-width: 480px) {
+/* mb < 680 - TB < 1024 - */
+@media screen and (max-width: 1023px) {
     header {
         display: flex;
         padding: 0;
         justify-content: space-around;
         gap: 20px;
     }
+
+    .numbersList {
+        gap: 15px;
+    }
+
+    .banner {
+        height: 400px;
+    }
+    .numberData {
+        width: 100%;
+        height: auto;
+    }
+
+    .numberContent {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .numberImages {
+        display: none;
+    }
+
+    .memberCard {
+        width: 335px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/* mb <= 767 - TB <= 1023 - */
+@media screen and (max-width: 767px) {
 
     header nav {
         display: none;
@@ -650,6 +698,7 @@ nav .active {
         color: #2cb5a0;
         box-shadow: 3px 3px 5px #0003;
     }
+
     .acessBar :nth-child(1):hover {
         background: #2cb5a0;
         color: #fdfdfd;
@@ -678,10 +727,12 @@ nav .active {
     .apresentation h1 {
         width: 100%;
         margin: 0;
+        padding: 0 20px;
     }
 
     .numbersList {
         width: 65%;
+        gap: 60px;
         /* border: 1px solid red; */
         margin: 0 auto;
         justify-content: flex-start;
@@ -692,24 +743,38 @@ nav .active {
         padding: 25px 10px;
         min-width: 100%;
         position: relative;
-        animation: caroussel 15s infinite ;
+        animation: caroussel 15s infinite;
         right: calc(0% - 0px)
     }
 
     @keyframes caroussel {
-        0%{    right: calc(0% - 0px);}
-        20%{    right: calc(0% - 0px);}
-        33%{    right: calc(100% + 60px);}
-        53%{    right: calc(100% + 60px);}
-        66%{    right: calc(200% + 120px);}
-        86%{    right: calc(200% + 120px);}
-        100%{    right: ;}
-    }
+        0% {
+            right: calc(0% - 0px);
+        }
 
-    .numberData {
-        margin: 0px auto;
-        width: 100%;
-        height: auto;
+        20% {
+            right: calc(0% - 0px);
+        }
+
+        33% {
+            right: calc(100% + 60px);
+        }
+
+        53% {
+            right: calc(100% + 60px);
+        }
+
+        66% {
+            right: calc(200% + 120px);
+        }
+
+        86% {
+            right: calc(200% + 120px);
+        }
+
+        100% {
+            right: calc(0% - 0px);
+        }
     }
 
     .numberImages {
@@ -718,7 +783,7 @@ nav .active {
 
     .numberContent {
         width: 100%;
-        padding: 20px;
+        padding: 0 20px;
     }
 
     .numberContent h1,
@@ -745,4 +810,21 @@ nav .active {
         margin: 20px auto;
     }
 
+    .containerCard {
+        gap: 0;
+    }
+
+    .card {
+        width: 100%;
+        border-radius: 0px;
+    }
+
+    .cardImage {
+        border-radius: 0px;
+    }
+
+    .memberCard {
+        width: 90%;
+        height: auto;
+    }
 }
