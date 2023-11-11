@@ -1,6 +1,7 @@
 const router = require("express").Router()
 const control = require("../controllers/controller")
 const middle = require("../controllers/middleware")
+const upload = require('../controllers/multer')
 
 
 router.get("/", (req, res) => {
@@ -12,7 +13,7 @@ router.get("/", (req, res) => {
 
 
 
-router.post("/registrar", control.createUser)
+router.post("/registrar", upload.single("file"), control.createUser)
 
 router.post("/atividades", control.createAct)
 

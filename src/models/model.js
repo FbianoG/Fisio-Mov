@@ -6,9 +6,11 @@ const Pacient = new mongoose.Schema({
 	email: { type: String, required: true, unique: true },
 	password: { type: String, required: false, },
 	nasc: { type: Date, },
+	tel: String,
 	isPacient: Boolean,
 	menssage: String,
 	activity: Object,
+	src: String,
 })
 
 const Activity = new mongoose.Schema({
@@ -20,7 +22,7 @@ const Activity = new mongoose.Schema({
 
 
 
-const PacientModel = mongoose.model("Pacient", Pacient)
+const PacientModel = mongoose.model("User", Pacient)
 
 const ActivityModel = mongoose.model("Activity", Activity)
 

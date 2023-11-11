@@ -3,28 +3,6 @@ let userData
 
 let activityList = document.querySelectorAll(".listActivity")
 
-let extendBtn = document.querySelectorAll(".extendListBtn")
-
-
-extendBtn.forEach(element => {
-	element.addEventListener("click", extendList)
-})
-
-
-
-
-
-
-function extendList() {
-	let target = this.parentElement
-	if (target.style.maxHeight == "500px") {
-		target.style.maxHeight = "45px"
-		this.style.transform = "rotate(0)"
-	} else {
-		target.style.maxHeight = "500px"
-		this.style.transform = "rotate(180deg)"
-	}
-}
 
 
 
@@ -43,7 +21,9 @@ async function loadingData(e) {
 	let getAct = await fetch("/buscarAct")
 	let data = await getAct.json()
 	let allActivity = data.allAct
-
+	document.querySelectorAll('.content h1')[0].textContent = `Bem vindo, ${e.name.split(" ").slice(0, 2).join(" ")}`
+	document.querySelectorAll('.perfilHeader img')[0].src = `../uploads/${e.src}`
+	console.log(e)
 	createActivity(allActivity, e)
 }
 

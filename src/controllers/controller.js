@@ -4,6 +4,7 @@ const secret = "teodoro"
 
 
 
+
 async function loginUser(req, res) {
 
 	let { email, password } = req.body
@@ -27,18 +28,9 @@ async function loginUser(req, res) {
 
 }
 
-
 async function user(req, res) {
 	res.json({ auth: true, user: req.userId })
 }
-
-
-
-
-
-
-
-
 
 async function getPacients(req, res) {
 
@@ -54,15 +46,15 @@ async function getPacients(req, res) {
 
 }
 
-
-
 async function createUser(req, res) {
-	let { name, email, password, nasc } = req.body
+	let { name, email, password, nasc, tel } = req.body
+	const file = req.file
+	console.log(file)
 	if (name && email && password && nasc) {
 		try {
 			name = name.toLowerCase()
 			email = email.toLowerCase()
-			let newClient = await PacientModel.create({ name, email, password, nasc, menssage: "", isPacient: true, higher: undefined, lower: undefined, })
+			let newClient = await PacientModel.create({ name, email, password, nasc, tel, menssage: "", isPacient: true, higher: undefined, lower: undefined, src: file.filename })
 			console.log({ message: "Usuário cadastrado com sucesso: ", newClient })
 			res.status(201).json({ message: "Usuário cadastrado" })
 		} catch (error) {
@@ -75,9 +67,6 @@ async function createUser(req, res) {
 	}
 
 }
-
-
-
 
 async function updateActivity(req, res) {
 	let { _id, menssage, ...rest } = req.body
@@ -96,9 +85,6 @@ async function updateActivity(req, res) {
 	}
 }
 
-
-
-
 async function createAct(req, res) {
 
 	let { name, web, category } = req.body
@@ -115,10 +101,6 @@ async function createAct(req, res) {
 	}
 
 }
-
-
-
-
 
 async function getAct(req, res) {
 	let allAct = await ActivityModel.find({})

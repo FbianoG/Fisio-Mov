@@ -3,7 +3,6 @@
 let token
 let userData
 let allPacients
-let allAct
 let getPacientsBtn = document.querySelectorAll('button')[0]
 let pacientList = document.querySelectorAll('.pacientList')[0]
 
@@ -26,6 +25,7 @@ async function getPacients() { // Get todos os pacientes cadastrados
     const data = await user.json()
     allPacients = data.allPacients
     createCards(allPacients)
+    console.log(allPacients)
 }
 
 
@@ -43,7 +43,6 @@ function createCards(e) {
 async function createActivity() {
     let getAct = await fetch("/buscarAct")
     let data = await getAct.json()
-    console.log(data.allAct);
     let ulHg = document.querySelectorAll('.higher')
     let ulLw = document.querySelectorAll('.lower')
 
@@ -76,26 +75,30 @@ async function createActivity() {
 
 createActivity()
 
+
+let dataAtual = new Date()
+
 function pacientCardHtml(e) {
+    console.log(e.nasc.slice(5, 1))
     const html = `
     <form action="/updateAtividade?id=${token}" method="post" class="pacientCardForm">
         <div class="pacientData">
             <input name="_id" style="display: none;" value="${e._id}"></input>
-            <h4>${e.name}</h4>
-            <span>64 anos</span>
+            <h4 >${e.name}</h4>
+            <span>${dataAtual.getFullYear() - Number(e.nasc.slice(0, 4))} anos</span>
             <span>${e.email}</span>
-            <span>(21) 97989-8990</span>
-            <span>Entorce do ternozelo esquerdo e fratura do dedo.</span>
+            <span>${e.tel}</span>
+            
         </div>
         <div class="pacientActivity">
             <div class="activityMember">
-                <h4>Membros Superiores</h4>
+                <h4>Superiores</h4>
                 <ul class="activityList higher">
                     
                 </ul>
             </div>
             <div class="activityMember">
-                <h4>Membros Inferiores</h4>
+                <h4>Inferiores</h4>
                 <ul class="activityList lower">
 
                 </ul>
