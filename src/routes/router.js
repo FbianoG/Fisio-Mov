@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
 
 router.post("/registrar", upload.single("file"), control.createUser)
 
-router.post("/atividades", control.createAct)
+router.post("/atividades", upload.single("file"), control.createAct)
 
 
 

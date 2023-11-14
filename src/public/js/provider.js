@@ -1,13 +1,24 @@
-
-
+// Variáveis
 let token
 let userData
 let allPacients
 let getPacientsBtn = document.querySelectorAll('button')[0]
 let pacientList = document.querySelectorAll('.pacientList')[0]
+let dataAtual = new Date()
+let pacientActivity = document.querySelectorAll('.pacientList')[0]
+
+
+
+
+// Eventos
 
 getPacientsBtn.addEventListener('click', getPacients)
+pacientActivity.addEventListener('click', activeAct)
 
+
+
+
+// Funções
 
 async function getUser() { // Get dados do usuário
     const urlParams = new URLSearchParams(window.location.search);
@@ -19,88 +30,47 @@ async function getUser() { // Get dados do usuário
     console.log(userData);
 }
 
-async function getPacients() { // Get todos os pacientes cadastrados
+async function getPacients() { // Get de dados de todos os pacientes cadastrados
     const token = localStorage.getItem('token')
     const user = await fetch(`/pacientes?id=${token}`)
     const data = await user.json()
     allPacients = data.allPacients
-    createCards(allPacients)
+    createCards(allPacients)  // Cria card de cada paciente cadastrado
     console.log(allPacients)
 }
 
-
-function createCards(e) {
+function createCards(e) { // Cria card de cada paciente cadastrado
     pacientList.innerHTML = ''
     e.forEach(element => {
         let newPacient = document.createElement('div')
         newPacient.classList = 'pacientCard'
-        newPacient.innerHTML = pacientCardHtml(element)
+        newPacient.innerHTML = pacientCardHtml(element) // Cria HTML do card do paciente
         pacientList.appendChild(newPacient)
     });
     createActivity()
 }
 
-async function createActivity() {
-    let getAct = await fetch("/buscarAct")
-    let data = await getAct.json()
-    let ulHg = document.querySelectorAll('.higher')
-    let ulLw = document.querySelectorAll('.lower')
-
-    ulHg.forEach(e => {
-        data.allAct.forEach(element => {
-            if (element.category == 'lw') {
-                return
-            }
-            let newAct = document.createElement('li')
-            newAct.innerHTML = `
-        <input type="checkbox" value="${element._id}" name="${element.category}[]">${element.name}`
-            // document.querySelectorAll('.higher')[0].appendChild(newAct)
-            e.appendChild(newAct)
-        });
-    });
-
-    ulLw.forEach(e => {
-        data.allAct.forEach(element => {
-            if (element.category == 'hg') {
-                return
-            }
-            let newAct = document.createElement('li')
-            newAct.innerHTML = `
-        <input type="checkbox" value="${element._id}" name="${element.category}[]">${element.name}`
-            // document.querySelectorAll('.higher')[0].appendChild(newAct)
-            e.appendChild(newAct)
-        });
-    });
-}
-
-createActivity()
-
-
-let dataAtual = new Date()
-
-function pacientCardHtml(e) {
+function pacientCardHtml(e) { // Cria HTML do card do paciente
     console.log(e.nasc.slice(5, 1))
     const html = `
     <form action="/updateAtividade?id=${token}" method="post" class="pacientCardForm">
         <div class="pacientData">
             <input name="_id" style="display: none;" value="${e._id}"></input>
+            <input name="by" style="display: none;" value="${userData.user.name}"></input>
             <h4 >${e.name}</h4>
             <span>${dataAtual.getFullYear() - Number(e.nasc.slice(0, 4))} anos</span>
             <span>${e.email}</span>
             <span>${e.tel}</span>
-            
         </div>
         <div class="pacientActivity">
             <div class="activityMember">
                 <h4>Superiores</h4>
                 <ul class="activityList higher">
-                    
                 </ul>
             </div>
             <div class="activityMember">
                 <h4>Inferiores</h4>
                 <ul class="activityList lower">
-
                 </ul>
             </div>
             <div class="pacienteHistoric">
@@ -113,8 +83,68 @@ function pacientCardHtml(e) {
     return html
 }
 
+async function createActivity() { // Cria HTML do "input" de cada atividade cadastrada pelo "DataBase"
+    let getAct = await fetch("/buscarAct")  // Get de dados de todos as atividades cadastrados
+    let data = await getAct.json()
+    let ulHg = document.querySelectorAll('.higher')
+    let ulLw = document.querySelectorAll('.lower')
+    ulHg.forEach(e => {
+        data.allAct.forEach(element => {
+            if (element.category == 'lw') {
+                return
+            }
+            let newAct = document.createElement('li')
+            newAct.innerHTML = `
+        <input type="checkbox" value="${element._id}" id="name" name="${element.category}">
+        <label>${element.name}</label>
+        <input type="number" placeholder="Repetições" class="number" name="rpth" disabled required>
+        <input type="number" placeholder="Séries" class="number" name="serh" disabled required>
+        `
+            // document.querySelectorAll('.higher')[0].appendChild(newAct)
+            e.appendChild(newAct)
+        });
+    });
+
+    ulLw.forEach(e => {
+        data.allAct.forEach(element => {
+            if (element.category == 'hg') {
+                return
+            }
+            let newAct = document.createElement('li')
+            newAct.innerHTML = `
+            <input type="checkbox" value="${element._id}" id="name" name="${element.category}">
+            <label>${element.name}</label>
+            <input type="number" placeholder="Repetições" class="number" name="rptl" disabled required>
+            <input type="number" placeholder="Séries" class="number" name="serl" disabled required>`
+            // document.querySelectorAll('.higher')[0].appendChild(newAct)
+            e.appendChild(newAct)
+        });
+    });
+}
+
+function activeAct(e) { // Habilita ou Desabilita "input de series e repetições" ao selecionar atividade
+    if (e.target.name == "hg" || e.target.name == "lw") {
+        let target = e.target.parentElement
+        if (e.target.checked == true) {
+            target.querySelectorAll('input[type="number"]').forEach(element => {
+                element.removeAttribute("disabled")
+            })
+        } else {
+            target.querySelectorAll('input[type="number"]').forEach(element => {
+                element.setAttribute("disabled", "true")
+            });
+        }
+
+    }
+
+}
 
 
+
+
+// Chamadas
+
+createActivity()
 
 
 

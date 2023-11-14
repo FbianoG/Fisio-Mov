@@ -69,18 +69,20 @@ async function createUser(req, res) {
 }
 
 async function updateActivity(req, res) {
-	let { _id, menssage, ...rest } = req.body
+	let { _id, menssage, hg, rpth, serh, lw, rptl, serl, by } = req.body
+
 	try {
 		if (!_id) {
 			return res.status(400).json({ message: "Falta informações na requisição!" })
 		}
 
-		let pacient = await PacientModel.findOneAndUpdate({ _id }, { menssage, activity: rest }, { new: true })
+		let pacient = await PacientModel.findOneAndUpdate({ _id }, { menssage, hg, rpth, serh, lw, rptl, serl, by }, { new: true })
 		if (!pacient) {
 			return res.status(404).json({ message: "Nenhum paciente encontrado!" })
 		}
 		res.status(200).json({ status: 200, message: "Tarefa atualizada!", pacient })
 	} catch (error) {
+		console.log(error)
 		return res.status(500).json({ message: "Algum erro foi encontrado!", error })
 	}
 }
@@ -88,12 +90,14 @@ async function updateActivity(req, res) {
 async function createAct(req, res) {
 
 	let { name, web, category } = req.body
-	if (!name || !web || !category) {
+	console.log(req.file)
+	const src = req.file
+	if (!name || !web || !category || !src) {
 		return res.status(401).json({ message: "Preencha todos os campos!" })
 	}
 	try {
 		name = name.toLowerCase()
-		let newAct = await ActivityModel.create({ name, web, category })
+		let newAct = await ActivityModel.create({ name, web, category, src: src.filename })
 		res.status(201).json({ message: "Atividade criada com sucesso!", newAct })
 	} catch (error) {
 		console.log(error)

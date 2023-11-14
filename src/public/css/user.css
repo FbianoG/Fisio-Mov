@@ -99,6 +99,13 @@ nav .active {
 
 .content h1 {
     text-transform: capitalize;
+    margin-bottom: 35px;
+}
+
+.content .title {
+    text-align: center;
+    margin: 30px 0 15px;
+    color: #333;
 }
 
 .containerActivity {
@@ -145,7 +152,7 @@ cursor: pointer;
 }
 
 .cardActivity {
-    height: 45px;
+    height: 80px;
     /* border: 1px solid blue; */
     margin-bottom: 10px;
     display: flex;
@@ -155,6 +162,16 @@ cursor: pointer;
 
 .cardData {
     width: 50%;
+    display: flex;
+    gap: 10px;
+}
+
+
+.actImg {
+    width: 80px;
+    height: 100%;
+    display: inline-block;
+    object-fit: cover;
 }
 
 .cardData h4 {

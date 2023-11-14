@@ -120,7 +120,7 @@ nav .active {
 .pacientData {
     display: grid;
     /* gap: 10px; */
-    width: 50%;
+    min-width: 400px;
 }
 
 .pacientCard:hover {
@@ -148,6 +148,7 @@ nav .active {
 .activityMember {
     height: 100%;
     width: 30%;
+    min-width: 250px;
     display: flex;
     flex-direction: column;
 }
@@ -157,7 +158,24 @@ nav .active {
     overflow: auto;
     color: #333;
     font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
+
+
+.activityList label{
+    margin-right: 100px;
+}
+.activityList .number{
+    width: 45%;
+    padding: 0px 5px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+}
+
 
 .pacienteHistoric {
     height: 100%;

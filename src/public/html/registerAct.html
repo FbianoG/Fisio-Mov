@@ -10,13 +10,14 @@
 </head>
 
 <body>
-    <form action="/atividades" method="post">
+    <form action="/atividades" method="post" enctype = "multipart/form-data">
         <input type="text" name="name" required placeholder="Nome da atividade">
         <input type="text" name="web" required placeholder="link da IA">
         <select name="category">
             <option value="hg">Membro Superior</option>
             <option value="lw">Membro Inferior</option>
         </select>
+        <input type="file" name="file">
         <button type="submit">Cadastrar</button>
     </form>
 </body>

@@ -9,14 +9,21 @@ const Pacient = new mongoose.Schema({
 	tel: String,
 	isPacient: Boolean,
 	menssage: String,
-	activity: Object,
 	src: String,
+	hg: Array,
+	rpth: Array,
+	serh: Array,
+	lw: Array,
+	rptl: Array,
+	serl: Array,
+	by: String
 })
 
 const Activity = new mongoose.Schema({
 	name: { type: String, unique: true },
 	category: String,
 	web: String,
+	src: { type: String, unique: true }
 })
 
 
