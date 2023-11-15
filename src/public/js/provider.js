@@ -21,6 +21,11 @@ pacientActivity.addEventListener('click', activeAct)
 async function getUser() { // Get dados do usuário
     const urlParams = new URLSearchParams(window.location.search);
     token = urlParams.get('id')
+    localStorage.setItem('token', token)
+    console.log(token)
+    if (token == null) {
+        body.innerHTML = ''
+    }
     const user = await fetch(`/usuario?id=${token}`)
     const data = await user.json()
     userData = data.user
