@@ -8,27 +8,26 @@ let btnHiddenForm = accessForm.querySelectorAll(".btnHidden")[0]
 btnAccessBar.addEventListener("click", showAcessForm)
 btnHiddenForm.addEventListener("click", hiddenAcessForm)
 btnRegisterBar.addEventListener("click", () => window.location.href = "registro.html")
-// ac.addEventListener('click', aces)
 
-// async function aces(e) {
-//     e.preventDefault()
-//     let get = await fetch('/usuario')
-//     let token = await get.json()
-//     if (token) {
-//         localStorage.setItem("token", token)
-//     }
-
-//     console.log(token);
-// }
 
 
 function showAcessForm() {
-
 	accessForm.style.top = "70px"
 }
 
 function hiddenAcessForm() {
 	accessForm.style.transition = "350ms"
 	accessForm.style.top = "-320px"
-
 }
+
+
+const urlParams = new URLSearchParams(window.location.search)
+if (urlParams.size > 0) {
+	const error = urlParams.get('error')
+	document.querySelectorAll('.accessForm input').forEach(element => {
+		element.style.borderColor = "#f47979"
+		element.placeholder = "Inválido"
+	})
+	document.querySelectorAll('.accessForm')[0].style.top = "70px"
+}
+

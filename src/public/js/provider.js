@@ -1,7 +1,5 @@
 // Variáveis
-let token
-let userData
-let allPacients
+let token, userData, allPacients
 let getPacientsBtn = document.querySelectorAll('button')[0]
 let pacientList = document.querySelectorAll('.pacientList')[0]
 let dataAtual = new Date()
@@ -22,12 +20,10 @@ pacientActivity.addEventListener('click', activeAct)
 
 async function getUser() { // Get dados do usuário
     const urlParams = new URLSearchParams(window.location.search);
-    token = urlParams.get('id');
-    localStorage.setItem('token', token)
+    token = urlParams.get('id')
     const user = await fetch(`/usuario?id=${token}`)
     const data = await user.json()
-    userData = data
-    console.log(userData);
+    userData = data.user
 }
 
 async function getPacients() { // Get de dados de todos os pacientes cadastrados
@@ -36,7 +32,6 @@ async function getPacients() { // Get de dados de todos os pacientes cadastrados
     const data = await user.json()
     allPacients = data.allPacients
     createCards(allPacients)  // Cria card de cada paciente cadastrado
-    console.log(allPacients)
 }
 
 function createCards(e) { // Cria card de cada paciente cadastrado
@@ -46,17 +41,16 @@ function createCards(e) { // Cria card de cada paciente cadastrado
         newPacient.classList = 'pacientCard'
         newPacient.innerHTML = pacientCardHtml(element) // Cria HTML do card do paciente
         pacientList.appendChild(newPacient)
-    });
+    })
     createActivity()
 }
 
 function pacientCardHtml(e) { // Cria HTML do card do paciente
-    console.log(e.nasc.slice(5, 1))
     const html = `
     <form action="/updateAtividade?id=${token}" method="post" class="pacientCardForm">
         <div class="pacientData">
             <input name="_id" style="display: none;" value="${e._id}"></input>
-            <input name="by" style="display: none;" value="${userData.user.name}"></input>
+            <input name="by" style="display: none;" value="${userData.name}"></input>
             <h4 >${e.name}</h4>
             <span>${dataAtual.getFullYear() - Number(e.nasc.slice(0, 4))} anos</span>
             <span>${e.email}</span>
@@ -122,7 +116,7 @@ async function createActivity() { // Cria HTML do "input" de cada atividade cada
     });
 }
 
-function activeAct(e) { // Habilita ou Desabilita "input de series e repetições" ao selecionar atividade
+function activeAct(e) { // Habilita ou Desabilita "input das series e repetições" ao selecionar atividade
     if (e.target.name == "hg" || e.target.name == "lw") {
         let target = e.target.parentElement
         if (e.target.checked == true) {
@@ -134,7 +128,6 @@ function activeAct(e) { // Habilita ou Desabilita "input de series e repetiçõe
                 element.setAttribute("disabled", "true")
             });
         }
-
     }
 
 }

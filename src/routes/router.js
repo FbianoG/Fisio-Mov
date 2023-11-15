@@ -12,9 +12,10 @@ router.get("/", (req, res) => {
 // Post
 
 
-
+// Criação de um novo "Usuário"
 router.post("/registrar", upload.single("file"), control.createUser)
 
+//Criação de uma nova "Atividade"
 router.post("/atividades", upload.single("file"), control.createAct)
 
 
