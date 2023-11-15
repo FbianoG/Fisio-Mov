@@ -5,7 +5,7 @@ let model, webcam, ctx, labelContainer, maxPredictions;
 
 let btnStart = document.querySelectorAll('button')[0]
 
-// init()
+init()
 async function init() {
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
@@ -49,7 +49,6 @@ async function loop(timestamp) {
 
     let percent = classeOne * 100
     let percent2 = classeTwo * 100
-
     barra(percent, percent2)
 }
 
