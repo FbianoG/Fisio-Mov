@@ -1,6 +1,11 @@
 const { PacientModel, ActivityModel } = require("../models/model")
+const path = require('path')
 const jwt = require("jsonwebtoken")
 const secret = "teodoro"
+
+
+
+
 
 async function createUser(req, res) { // Cria um novo usuário
 	let { name, email, password, nasc, tel } = req.body
@@ -23,7 +28,7 @@ async function createUser(req, res) { // Cria um novo usuário
 	}
 }
 
-async function createAct(req, res) { // Cria uma nova usuário
+async function createAct(req, res) { // Cria uma nova atividade
 	let { name, web, category } = req.body
 	console.log(req.file)
 	const src = req.file
@@ -43,17 +48,20 @@ async function createAct(req, res) { // Cria uma nova usuário
 
 async function loginUser(req, res) { // Validação de login
 	let { email, password } = req.body
-	email.toLowerCase()
 	try {
+		if (!email || !password) {
+			return res.status(400).json({ menssage: "Preencha todos os campos!" })
+		}
+		email.toLowerCase()
 		let user = await PacientModel.findOne({ email })
 		if (!user || password != user.password) {
-			return res.status(401).redirect('/html/index.html?error=CredenciaisInválidas')
+			return res.status(401).redirect('/?auth=loginInvalido')
 		}
 		const token = jwt.sign({ id: user }, secret, { expiresIn: "1h" })
 		if (user.isPacient == true) {
-			return res.redirect(`/html/user.html?id=${token}`)
+			return res.redirect(`/user?id=${token}`)
 		} else {
-			return res.redirect(`/html/provider.html?id=${token}`)
+			return res.redirect(`/provider?id=${token}`)
 		}
 	} catch (error) {
 		console.log(error)
@@ -61,15 +69,14 @@ async function loginUser(req, res) { // Validação de login
 	}
 }
 
-async function user(req, res) {
+async function getUser(req, res) {
 	res.status(200).json({ status: 200, auth: true, user: req.userId }) //  req.userId vem do token codificado 
 }
 
-async function getPacients(req, res) { // Busca todos os "Usuários" no "DataBase"
+async function getAllUsers(req, res) { // Busca todos os "Usuários" no "DataBase"
 	try {
 		let allPacients = await PacientModel.find({ isPacient: true, }, "-password")
 		if (allPacients.length === 0) {
-			console.log({ status: 204, message: "Não possui pacientes cadastrados no DataBase!" })
 			return res.status(204).end()
 		}
 		return res.status(200).json({ status: 200, auth: true, allPacients })
@@ -78,7 +85,7 @@ async function getPacients(req, res) { // Busca todos os "Usuários" no "DataBas
 	}
 }
 
-async function getAct(req, res) { // Busca todas as "Atividades" no "DataBase"
+async function getAllActivity(req, res) { // Busca todas as "Atividades" no "DataBase"
 	try {
 		let allAct = await ActivityModel.find({})
 		if (allAct.length == 0) {
@@ -94,6 +101,7 @@ async function getAct(req, res) { // Busca todas as "Atividades" no "DataBase"
 
 async function updateActivity(req, res) { // Atualiza e envia ao usuário as atividades
 	let { _id, menssage, hg, rpth, serh, lw, rptl, serl, by } = req.body
+	const token = req.query.id
 	try {
 		if (!_id) {
 			return res.status(400).json({ message: "Falta informações na requisição!" })
@@ -108,21 +116,49 @@ async function updateActivity(req, res) { // Atualiza e envia ao usuário as ati
 		if (!pacient) {
 			return res.status(404).json({ message: "Nenhum paciente encontrado!" })
 		}
-		res.status(200).json({ status: 200, message: "Tarefa atualizada!", pacient })
+		res.status(200).redirect(`/provider?id=${token}`)
 	} catch (error) {
 		console.log(error)
 		return res.status(500).json({ status: 500, message: "Algum erro foi encontrado!", error })
 	}
 }
 
+// SendFiles
+
+async function index(req, res) {
+	res.status(200).sendFile(path.join(__dirname, "../public/html/index.html"))
+}
+
+async function register(req, res) {
+	res.status(200).sendFile(path.join(__dirname, "../public/html/registro.html"))
+}
+
+async function user(req, res) {
+	res.status(200).sendFile(path.join(__dirname, "../public/html/user.html"))
+}
+
+async function activity(req, res) {
+	res.status(200).sendFile(path.join(__dirname, "../public/html/atividade.html"))
+}
+
+async function provider(req, res) {
+	res.status(200).sendFile(path.join(__dirname, "../public/html/provider.html"))
+}
+
+
+
 
 module.exports = {
-	createUser,
 	loginUser,
-	user,
-	getPacients,
-	updateActivity,
+	createUser,
 	createAct,
-	getAct,
-
+	updateActivity,
+	getUser,
+	getAllUsers,
+	getAllActivity,
+	index,
+	user,
+	register,
+	activity,
+	provider,
 }

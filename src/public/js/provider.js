@@ -1,16 +1,18 @@
 // Variáveis
-let token, userData, allPacients
-let getPacientsBtn = document.querySelectorAll('button')[0]
+let userData, allPacients
 let pacientList = document.querySelectorAll('.pacientList')[0]
 let dataAtual = new Date()
 let pacientActivity = document.querySelectorAll('.pacientList')[0]
 
 
+const urlParams = new URLSearchParams(window.location.search);
+const token = urlParams.get('id')
+
 
 
 // Eventos
 
-getPacientsBtn.addEventListener('click', getPacients)
+
 pacientActivity.addEventListener('click', activeAct)
 
 
@@ -18,24 +20,25 @@ pacientActivity.addEventListener('click', activeAct)
 
 // Funções
 
-async function getUser() { // Get dados do usuário
-    const urlParams = new URLSearchParams(window.location.search);
-    token = urlParams.get('id')
+async function getUser() { // Get dos dados do usuário
     localStorage.setItem('token', token)
     console.log(token)
     if (token == null) {
         body.innerHTML = ''
     }
-    const user = await fetch(`/usuario?id=${token}`)
+    const user = await fetch(`/user?id=${token}`)
     const data = await user.json()
     userData = data.user
 }
 
-async function getPacients() { // Get de dados de todos os pacientes cadastrados
+async function getPacients() { // Get dos dados de todos os pacientes cadastrados
     const token = localStorage.getItem('token')
-    const user = await fetch(`/pacientes?id=${token}`)
+    const user = await fetch(`/getAllUsers?id=${token}`)
     const data = await user.json()
-    allPacients = data.allPacients
+    // console.log(data)
+    allPacients = data.allPacients.sort((a, b) => { // Ordena por ordem alfabética
+        return a.name.localeCompare(b.name)
+    })
     createCards(allPacients)  // Cria card de cada paciente cadastrado
 }
 
@@ -52,10 +55,10 @@ function createCards(e) { // Cria card de cada paciente cadastrado
 
 function pacientCardHtml(e) { // Cria HTML do card do paciente
     const html = `
-    <form action="/updateAtividade?id=${token}" method="post" class="pacientCardForm">
+    <form action="/updateActivity?id=${token}" method="post" class="pacientCardForm">
         <div class="pacientData">
             <input name="_id" style="display: none;" value="${e._id}"></input>
-            <input name="by" style="display: none;" value="${userData.name}"></input>
+            <input name="by" style="display: none;" value="${e.name}"></input>
             <h4 >${e.name}</h4>
             <span>${dataAtual.getFullYear() - Number(e.nasc.slice(0, 4))} anos</span>
             <span>${e.email}</span>
@@ -83,7 +86,7 @@ function pacientCardHtml(e) { // Cria HTML do card do paciente
 }
 
 async function createActivity() { // Cria HTML do "input" de cada atividade cadastrada pelo "DataBase"
-    let getAct = await fetch("/buscarAct")  // Get de dados de todos as atividades cadastrados
+    let getAct = await fetch(`/getAllActivity?id=${token}`)  // Get de dados de todos as atividades cadastrados
     let data = await getAct.json()
     let ulHg = document.querySelectorAll('.higher')
     let ulLw = document.querySelectorAll('.lower')
@@ -142,7 +145,9 @@ function activeAct(e) { // Habilita ou Desabilita "input das series e repetiçõ
 
 // Chamadas
 
-createActivity()
+getUser() // Get dos dados do usuário
+
+getPacients() // Get dos dados de todos os pacientes cadastrados
 
 
 
@@ -157,8 +162,3 @@ createActivity()
 
 
 
-
-
-
-
-getUser() 

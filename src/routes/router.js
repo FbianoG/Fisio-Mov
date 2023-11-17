@@ -4,36 +4,48 @@ const middle = require("../controllers/middleware")
 const upload = require('../controllers/multer')
 
 
-router.get("/", (req, res) => {
-	res.redirect("/html/index.html")
-})
+// Validação de login
 
-
-// Post
-
-
-// Criação de um novo "Usuário"
-router.post("/registrar", upload.single("file"), control.createUser)
-
-//Criação de uma nova "Atividade"
-router.post("/atividades", upload.single("file"), control.createAct)
+router.post("/login", control.loginUser)
 
 
 
-//authentication
-router.post("/login", control.loginUser) // Faz login 
+
+router.post("/createUser", upload.single("file"), control.createUser) // Criação de um novo "Usuário"
+
+router.post("/atividades", upload.single("file"), control.createAct) //Criação de uma nova "Atividade"
 
 
 
-router.get("/usuario", middle.verifyJWT, control.user)
 
-router.get("/pacientes", middle.verifyJWT, control.getPacients)
+// Atualizada atividades
 
-router.post("/updateAtividade", middle.verifyJWT, control.updateActivity)
-
-router.get("/buscarAct", control.getAct)
+router.post("/updateActivity", middle.verifyJWT, control.updateActivity)
 
 
+
+
+// Busca dados
+
+router.get("/getUser", middle.verifyJWT, control.getUser)
+
+router.get("/getAllUsers", middle.verifyJWT, control.getAllUsers)
+
+router.get("/getAllActivity", middle.verifyJWT, control.getAllActivity)
+
+
+
+// Redirecionamento de página
+
+router.get("/", control.index)
+
+router.get('/register', control.register)
+
+router.get("/user", middle.verifyJWT, control.user)
+
+router.get("/activity", middle.verifyJWT, control.activity)
+
+router.get("/provider", middle.verifyJWT, control.provider)
 
 
 

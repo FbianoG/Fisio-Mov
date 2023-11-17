@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
+    scroll-behavior: smooth;
 }
 
 html {
@@ -390,6 +391,7 @@ nav .active {
 .formEmail input {
     height: 35px;
     width: 70%;
+    max-width: 450px;
     padding: 3px 5px;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -400,6 +402,7 @@ nav .active {
 .formEmail textarea {
     height: 120px;
     width: 70%;
+    max-width: 450px;
     padding: 3px 5px;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -507,6 +510,7 @@ nav .active {
     justify-content: center;
     flex-wrap: wrap;
     gap: 100px;
+    padding: 0 5%;
 
 }
 
@@ -616,6 +620,14 @@ nav .active {
 .footerBanner {
     height: 400px;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #eee;
+    text-shadow: 1px 1px 10px #002;
+    text-align: center;
+    padding: 0 20px;
 }
 
 .footerBanner img {
@@ -624,17 +636,69 @@ nav .active {
     height: 100%;
     filter: brightness(50%) grayscale(50%);
     object-fit: cover;
-
-
+    z-index: -1;
 }
 
-.footerBanner {}
+.footerBanner h2 {
+    font-size: 35px;
+    text-decoration: none;
+
+    font-weight: 500;
+}
+
+.footerBanner a {
+    font-size: 25px;
+    text-decoration: none;
+    color: #80d6c4;
+    font-weight: 500;
+}
+.footerBanner a:hover {
+    transition: 300ms;
+    opacity: 0.7;
+}
 
 .footerData {
     background: #5a655d;
     height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 20px;
+}
+.footerIcons {
+    display: flex;
+    gap: 25px;
+}
+.footerData p {
+   color: #111;
+}
+.footerIcons i {
+    font-size: 30px;
+    color: #111;
+    margin: 10px 0 20px;
+}
+.footerIcons i:hover {
+    transition: 300ms;
+    color: #2cb5a0;
 }
 
+.footerData nav {
+    color: #111;
+    flex-wrap: wrap;
+    gap: 10px 40px;
+    justify-content: center;
+}
+.footerData nav a{
+    color: #111;
+
+}
+.footerData label{
+    color: #333;
+    justify-self: flex-end;
+    font-size: 13px;
+    text-align: center;
+}
 
 
 
@@ -797,11 +861,13 @@ nav .active {
 
     .formEmail input {
         width: 100%;
+
         font-size: 16px;
     }
 
     .formEmail textarea {
         width: 100%;
+
         height: 150px;
         font-size: 16px;
     }
@@ -812,6 +878,7 @@ nav .active {
 
     .containerCard {
         gap: 0;
+        padding: 0;
     }
 
     .card {

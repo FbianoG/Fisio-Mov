@@ -3,22 +3,23 @@
 let userData
 let activityList = document.querySelectorAll(".listActivity")
 
+const urlParams = new URLSearchParams(window.location.search)
+const token = urlParams.get("id")
+
 
 
 
 // Funções
 
-async function getUser() {
-	const urlParams = new URLSearchParams(window.location.search)
-	let token = urlParams.get("id")
+async function getUser() { // GET dados do "Usuário"
 	localStorage.setItem("token", token)
-	const user = await fetch(`/usuario?id=${token}`)
+	const user = await fetch(`/getUser?id=${token}`)
 	const data = await user.json()
 	loadingData(data.user)
 }
 
-async function loadingData(e) {
-	let getAct = await fetch("/buscarAct")
+async function loadingData(e) { // Gera HTML da página com os dados do "Usuário"
+	let getAct = await fetch(`/getAllActivity?id=${token}`)
 	if (getAct.status === 204) {
 		return console.log({ status: 204, menssage: "DataBase não possui atividades cadastradas!" })
 	}
@@ -29,11 +30,10 @@ async function loadingData(e) {
 	createActivity(allActivity, e)
 }
 
-function createActivity(atividadeApi, userData) {
+function createActivity(atividadeApi, userData) { // Cria e filtra as atividades que foram enviadas ao "Usuário" 
 	activityList[0].innerHTML = ""
 	let listHg = document.querySelectorAll(".higher")[0]
 	let listLw = document.querySelectorAll(".lower")[0]
-
 	for (let i = 0; i < userData.hg.length; i++) {
 		atividadeApi.forEach(element => {
 			if (userData.hg[i] === element._id) {
@@ -44,7 +44,6 @@ function createActivity(atividadeApi, userData) {
 			}
 		});
 	}
-
 	for (let i = 0; i < userData.lw.length; i++) {
 		atividadeApi.forEach(element => {
 			if (userData.lw[i] === element._id) {
@@ -72,7 +71,7 @@ function createActivityHtml(e, rpt, ser, userData) { // Cria o HTML de cada ativ
 			</div>
         </div>
         <div class="statusActivity">
-			<a href="../html/atividade.html?act=${e.web}" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square" id="acessActivityBtn"></i></a>
+			<a href="/activity?act=${e.web}&id=${token}" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square" id="acessActivityBtn"></i></a>
             <p>Acessar Atividade</p>
         </div>
     `
@@ -82,7 +81,6 @@ function createActivityHtml(e, rpt, ser, userData) { // Cria o HTML de cada ativ
 
 
 
-
 // Chamadas
 
-getUser() 
+getUser()  // GET dados do "Usuário"

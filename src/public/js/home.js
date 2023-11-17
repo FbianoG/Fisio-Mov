@@ -7,7 +7,7 @@ let btnHiddenForm = accessForm.querySelectorAll(".btnHidden")[0]
 
 btnAccessBar.addEventListener("click", showAcessForm)
 btnHiddenForm.addEventListener("click", hiddenAcessForm)
-btnRegisterBar.addEventListener("click", () => window.location.href = "registro.html")
+btnRegisterBar.addEventListener("click", () => window.location.href = "/register")
 
 
 
