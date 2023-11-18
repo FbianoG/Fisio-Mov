@@ -13,7 +13,7 @@ router.post("/login", control.loginUser)
 
 router.post("/createUser", upload.single("file"), control.createUser) // Criação de um novo "Usuário"
 
-router.post("/atividades", upload.single("file"), control.createAct) //Criação de uma nova "Atividade"
+router.post("/createAct", upload.single("file"), control.createAct) //Criação de uma nova "Atividade"
 
 
 
@@ -48,6 +48,8 @@ router.get("/activity", middle.verifyJWT, control.activity)
 router.get("/provider", middle.verifyJWT, control.provider)
 
 router.get("/access", control.access)
+
+router.get("/registerAct", control.registerAct)
 
 
 

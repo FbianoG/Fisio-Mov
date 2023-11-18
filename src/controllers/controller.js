@@ -16,8 +16,7 @@ async function createUser(req, res) { // Cria um novo usuário
 			name = name.toLowerCase()
 			email = email.toLowerCase()
 			let newClient = await PacientModel.create({ name, email, password, nasc, tel, menssage: "", isPacient: true, higher: undefined, lower: undefined, src: file.filename })
-			console.log({ message: "Usuário cadastrado com sucesso: ", newClient })
-			res.status(201).json({ message: "Usuário cadastrado" })
+			res.status(201).redirect("/")
 		} catch (error) {
 			console.log({ message: "Erro ao criar cadastro", error })
 			res.status(500).json({ error: error })
@@ -149,6 +148,10 @@ async function access(req, res) {
 	res.status(200).sendFile(path.join(__dirname, "../public/html/acessibilidade.html"))
 }
 
+async function registerAct(req, res) {
+	res.status(200).sendFile(path.join(__dirname, "../public/html/registerAct.html"))
+}
+
 
 
 
@@ -166,4 +169,5 @@ module.exports = {
 	activity,
 	provider,
 	access,
+	registerAct
 }
