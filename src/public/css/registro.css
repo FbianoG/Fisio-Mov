@@ -78,7 +78,7 @@ margin: 0 10px 0 0;
 
 
 main {
-    margin: 100px 0 250px;
+    margin: 100px 0 0;
 }
 
 h1 {
@@ -93,7 +93,7 @@ form {}
 
 
 form {
-    margin: 0 auto;
+    margin: 0 auto 100px;
     max-width: 400px;
     display: flex;
     flex-direction: column;
@@ -160,9 +160,7 @@ form button:hover {
 
 
 footer {
-    position: fixed;
     width: 100%;
-    bottom: 0;
 }
 
 .footerData {

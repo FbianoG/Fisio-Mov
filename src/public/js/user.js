@@ -2,9 +2,17 @@
 
 let userData
 let activityList = document.querySelectorAll(".listActivity")
-
+let access = document.querySelectorAll('.access')[0]
 const urlParams = new URLSearchParams(window.location.search)
 const token = urlParams.get("id")
+let btnHiddenAccess = document.querySelector('#btcHiddenAccess')
+
+
+
+
+btnHiddenAccess.addEventListener('click', hiddenAccess)
+
+
 
 
 
@@ -78,9 +86,19 @@ function createActivityHtml(e, rpt, ser, userData) { // Cria o HTML de cada ativ
 	return html
 }
 
+function hiddenAccess() {
+	access.style.right = "-350px"
+}
+
+function showAccess() {
+	access.style.transition = "300ms"
+	access.style.right = "30px"
+}
 
 
 
 // Chamadas
+
+setTimeout(showAccess, 3000)
 
 getUser()  // GET dados do "Usuário"

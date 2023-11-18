@@ -10,7 +10,8 @@ function verifyJWT(req, res, next) {
     }
     try {
         const decoded = jwt.verify(token, secret)
-        req.userId = decoded.id;
+        req.userId = decoded.id
+        
         next()
     } catch (error) {
         return res.status(500).json({ auth: false, message: 'Sessão expirada. Faça login novamente.' })

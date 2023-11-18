@@ -22,11 +22,7 @@ pacientActivity.addEventListener('click', activeAct)
 
 async function getUser() { // Get dos dados do usuário
     localStorage.setItem('token', token)
-    console.log(token)
-    if (token == null) {
-        body.innerHTML = ''
-    }
-    const user = await fetch(`/user?id=${token}`)
+    const user = await fetch(`/getUser?id=${token}`)
     const data = await user.json()
     userData = data.user
 }
@@ -58,7 +54,7 @@ function pacientCardHtml(e) { // Cria HTML do card do paciente
     <form action="/updateActivity?id=${token}" method="post" class="pacientCardForm">
         <div class="pacientData">
             <input name="_id" style="display: none;" value="${e._id}"></input>
-            <input name="by" style="display: none;" value="${e.name}"></input>
+            <input name="by" style="display: none;" value="${userData.name}"></input>
             <h4 >${e.name}</h4>
             <span>${dataAtual.getFullYear() - Number(e.nasc.slice(0, 4))} anos</span>
             <span>${e.email}</span>

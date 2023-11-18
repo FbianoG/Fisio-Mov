@@ -13,7 +13,7 @@ header {
     background: #fdfdfd;
     height: 70px;
     display: grid;
-    grid-template-columns: max-content max-content ;
+    grid-template-columns: max-content max-content;
     gap: 100px;
     align-items: center;
     justify-content: space-between;
@@ -52,16 +52,35 @@ nav .active {
     font-weight: bold;
 }
 
-.acessBar {
+.accessBar {
     display: flex;
     gap: 30px;
     justify-self: flex-end;
     align-items: center;
 }
 
-.acessBar i {
-    font-size: 20px;
-    color: #c82c3f;
+.accessBar a {
+    padding: 5px 10px;
+    color: #2cb5a0;
+    background: #fdfdfd;
+    box-shadow: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.accessBar a:hover {
+    transition: 300ms;
+    color: #fdfdfd;
+    background: #2cb5a0;
+    box-shadow: 3px 3px 5px #0003;
 }
 
 .perfilHeader {
@@ -88,33 +107,44 @@ nav .active {
 
 /* CONTENT */
 
-
+.content h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+    font-weight: 500;
+}
 
 .containerPacients {
     width: 90%;
+    max-width: 1700px;
     height: auto;
     margin: 0 auto;
     box-shadow: 3px 3px 10px #0003;
     border-radius: 10px;
     overflow: hidden;
+    overflow-x: auto;
 }
 
 .containerPacients h2 {
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    font-weight: 500;
 }
 
 .pacientList {
     list-style: none;
+    overflow: auto;
 }
 
-.pacientCard {}
+.pacientCard {
+    width: max-content;
+}
 
 .pacientCardForm {
     height: 150px;
-    padding: 10px;
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
+    padding: 5px 10px;
 }
 
 .pacientData {
@@ -130,6 +160,8 @@ nav .active {
 
 .pacientCard h4 {
     text-transform: capitalize;
+    font-weight: 500;
+    color: #2cb5a0;
 }
 
 .pacientCard span {
@@ -148,7 +180,7 @@ nav .active {
 .activityMember {
     height: 100%;
     width: 30%;
-    min-width: 250px;
+    min-width: 300px;
     display: flex;
     flex-direction: column;
 }
@@ -164,10 +196,16 @@ nav .active {
 }
 
 
-.activityList label{
-    margin-right: 100px;
+.activityList label {
+    width: 90%;
+    display: inline-block;
+    margin-bottom: 3px;
+    text-transform: capitalize;
+    color: #333;
+    border-bottom: 1px solid #ddd;
 }
-.activityList .number{
+
+.activityList .number {
     width: 45%;
     padding: 0px 5px;
     outline: none;
@@ -179,7 +217,7 @@ nav .active {
 
 .pacienteHistoric {
     height: 100%;
-
+    min-width: 150px;
 
 }
 

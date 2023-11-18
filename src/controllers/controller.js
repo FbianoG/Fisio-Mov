@@ -145,6 +145,10 @@ async function provider(req, res) {
 	res.status(200).sendFile(path.join(__dirname, "../public/html/provider.html"))
 }
 
+async function access(req, res) {
+	res.status(200).sendFile(path.join(__dirname, "../public/html/acessibilidade.html"))
+}
+
 
 
 
@@ -161,4 +165,5 @@ module.exports = {
 	register,
 	activity,
 	provider,
+	access,
 }

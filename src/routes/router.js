@@ -47,6 +47,8 @@ router.get("/activity", middle.verifyJWT, control.activity)
 
 router.get("/provider", middle.verifyJWT, control.provider)
 
+router.get("/access", control.access)
+
 
 
 

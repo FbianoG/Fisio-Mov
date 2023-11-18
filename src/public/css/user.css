@@ -58,17 +58,38 @@ nav .active {
     font-weight: bold;
 }
 
-.acessBar {
+.accessBar {
     display: flex;
     gap: 30px;
     justify-self: flex-end;
     align-items: center;
+
 }
 
-.acessBar i {
-    font-size: 20px;
-    color: #c82c3f;
+.accessBar a {
+    padding: 5px 10px;
+    color: #2cb5a0;
+    background: #fdfdfd;
+    box-shadow: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
+
+.accessBar a:hover {
+    transition: 300ms;
+    color: #fdfdfd;
+    background: #2cb5a0;
+    box-shadow: 3px 3px 5px #0003;
+}
+
 
 .perfilHeader {
     width: 50px;
@@ -100,6 +121,14 @@ nav .active {
 .content h1 {
     text-transform: capitalize;
     margin-bottom: 35px;
+    font-weight: 500;
+    color: #333;
+}
+
+.content h2 {
+    text-transform: capitalize;
+    font-weight: 500;
+    color: #333;
 }
 
 .content .title {
@@ -135,12 +164,12 @@ nav .active {
 }
 
 .fa-chevron-down {
-display: flex;
-justify-content: center;
-align-items: center;
-transition: 250ms;
-font-size: 20px;
-cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 250ms;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 .listActivity {
@@ -203,17 +232,73 @@ cursor: pointer;
 
 
 
+.access {
+    position: fixed;
+    right: -350px;
+    bottom: 30px;
+    width: 300px;
+    height: 300px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #fdfdfd;
+    box-shadow: 2px 2px 5px #0003;
+    text-align: center;
+}
 
-/* mb <= 767 - TB <= 1023 - */
-@media screen and (max-width: 767px) {
+.access i {
+    display: block;
+    font-size: 45px;
+    text-align: center;
+    color: #2cb5a0;
+    text-shadow: 3px 3px 5px #0003;
+}
 
-    .statusActivity p , .statusActivity i {
-        display: none;
-    }
-    .statusActivity a i {
-        display: block;
-    }
+.access span {
+    width: 100%;
+    font-size: 20px;
+    color: #333;
+}
+.access label {
+    display: block;
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0 0;
+}
+
+.access a {
+    display: block;
+    margin: 20px 0 0;
+}
+.access a:hover {
+opacity: 0.5;
+transition: 300ms;
+}
+
+.access button {
+    margin: 30px 0 0;
+opacity: 0.5;
+
+cursor: pointer;
+padding: 3px 5px;
+border-radius: 5px;
+border: 1px solid #bbb;
+}
+.access button:hover {
+opacity: 1;
+transition: 300ms;
 }
 
 
 
+/* mb <= 767 - TB <= 1023 - */
+@media screen and (max-width: 767px) {
+
+    .statusActivity p,
+    .statusActivity i {
+        display: none;
+    }
+
+    .statusActivity a i {
+        display: block;
+    }
+}
